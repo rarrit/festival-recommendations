@@ -3,7 +3,7 @@
   "tabWidth": 2,
   "useTabs": false,
   "semi": true,
-  "singleQuote": false, // 작은 따옴표 사용 x
+  "singleQuote": false,
   "bracketSpacing": true,
   "trailingComma": "none"
 }
