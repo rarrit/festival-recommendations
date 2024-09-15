@@ -1,7 +1,15 @@
+import useAuthStore from "@/core/store/authStore";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Main = () => {
+  const { state } = useLocation();
+  const { setIsLoggedIn } = useAuthStore();
+  useEffect(() => {
+    setIsLoggedIn(state);
+  }, [state]);
+  
   useEffect(() => {
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
