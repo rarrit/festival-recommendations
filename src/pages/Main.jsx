@@ -10,6 +10,7 @@ const Main = () => {
   const { setIsLoggedIn } = useAuthStore();
 
   const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     setIsLoggedIn(state);
@@ -36,9 +37,11 @@ const Main = () => {
       if (status === kakao.maps.services.Status.OK) {
         console.log("그런 너를 마주칠까 " + result[0].address.address_name + "을 못가");
       }
+      setAddress(result[0].address.address_name);
     };
 
-    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+    const result = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+    console.log(result);
   }, [location]);
 
   return (
@@ -46,6 +49,7 @@ const Main = () => {
       <button id="find-me" onClick={() => displayCenterInfo(result, status)}>
         내 위치 보기
       </button>
+      <p>내 현재 위치는 {address} 입니다</p>
       <br />
       <p id="status"></p>
       <a id="map-link" target="_blank"></a>
