@@ -55,7 +55,7 @@ export function Festival() {
               <button
                 onClick={() =>
                   handleOpenMapTab(
-                    `https://map.kakao.com/link/map/${Number(festival.latitude)},${Number(festival.longitude)}`
+                    `https://map.kakao.com/link/to/${festival.fstvlNm},${Number(festival.latitude)},${Number(festival.longitude)}`
                   )
                 }
               >
