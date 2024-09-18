@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { geoFindMe } from "@/core/api/geoFindMe";
+import { Festival } from "@/components/Festival";
 // import { displayCenterInfo } from "@/core/api/findAddress";
 
 const Main = () => {
@@ -45,17 +46,23 @@ const Main = () => {
 
   return (
     <StMain id="main">
-      {/* <button id="find-me" onClick={() => displayCenterInfo(result, status)}>
-        내 위치 보기
-      </button> */}
-      <p>내 현재 위치는 {address} 입니다</p>
-      <br />
-      <p id="status"></p>
-      <a id="map-link" target="_blank"></a>
-      <div id="map" style={{ width: "500px", height: "350px" }}></div>
+      <Festival />
+      <section>
+        <p>내 현재 위치는 {address} 입니다</p>
+        <br />
+        <p id="status"></p>
+        <a id="map-link" target="_blank"></a>
+        <Map id="map" style={{ width: "850px", height: "800px" }}></Map>
+      </section>
     </StMain>
   );
 };
 
-const StMain = styled.div``;
+const StMain = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const Map = styled.div``;
+
 export default Main;
