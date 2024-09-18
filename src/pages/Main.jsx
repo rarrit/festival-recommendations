@@ -41,14 +41,13 @@ const Main = () => {
     };
 
     const result = geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-    console.log(result);
   }, [location]);
 
   return (
     <StMain id="main">
-      <button id="find-me" onClick={() => displayCenterInfo(result, status)}>
+      {/* <button id="find-me" onClick={() => displayCenterInfo(result, status)}>
         내 위치 보기
-      </button>
+      </button> */}
       <p>내 현재 위치는 {address} 입니다</p>
       <br />
       <p id="status"></p>
