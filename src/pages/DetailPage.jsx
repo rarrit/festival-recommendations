@@ -95,18 +95,17 @@ const DetailPage = () => {
 
   return (
     <StDetailPage>
-      <MapContainer>
-        <h2>축제 지도</h2>
-        <div id="map" style={{ width: "100%", height: "800px" }}></div>
-      </MapContainer>
+      <StMapContainer>        
+        <div id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></div>
+      </StMapContainer>
 
-      <FestivalInfoContainer>
-        <h2>축제 정보</h2>
+      <StFestivalInfoContainer>
+        <StVideoArea>
+          영상 위치
+        </StVideoArea>
+        <h2>{selectedFestival && selectedFestival.fstvlNm}</h2>        
         {selectedFestival ? (
-          <div>
-            <p>
-              <strong>축제명:</strong> {selectedFestival.fstvlNm}
-            </p>
+          <div className="info">
             <p>
               <strong>개최 장소:</strong> {selectedFestival.opar}
             </p>
@@ -132,7 +131,7 @@ const DetailPage = () => {
         ) : (
           <p>마커를 클릭하여 축제 정보를 확인하세요.</p>
         )}
-      </FestivalInfoContainer>
+      </StFestivalInfoContainer>
     </StDetailPage>
   );
 };
@@ -141,16 +140,27 @@ const DetailPage = () => {
 const StDetailPage = styled.div`
   display: flex;
   align-items: flex-start;
+  height: calc(100% - 35px);  
 `;
 
-const MapContainer = styled.div`
+const StMapContainer = styled.div`
   width: 50%;
 `;
 
-const FestivalInfoContainer = styled.div`
+const StFestivalInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 50%;
+  height: 100%;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
+
+const StVideoArea = styled.div`
+  width: 100%;
+  height: 200px;
+  border: 1px solid #e5e5e5;
+  margin: 0 0 15px;
+`
 
 export default DetailPage;
