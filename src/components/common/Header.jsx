@@ -2,6 +2,7 @@ import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import useAuthStore from "@/core/store/authStore";
 import { Link, useNavigate } from "react-router-dom";
+// import logo from "@/assets/img/logo.png"
 
 const Header = () => {
   const { logout, isLoggedIn } = useAuthStore();
@@ -17,7 +18,7 @@ const Header = () => {
       <GlobalStyle />
       <StHeader>
         <div className="inner">
-          <h1><Link to="/">내 주변 가을 축제 리스트</Link></h1>
+          <h1><Link to="/">가을축제핑</Link></h1>
           <ul>
             {isLoggedIn ? (
               <>

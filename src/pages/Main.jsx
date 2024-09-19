@@ -7,11 +7,15 @@ import { Festival } from "@/components/Festival";
 // import { displayCenterInfo } from "@/core/api/findAddress";
 
 const Main = () => {
-
+  const { state } = useLocation();
+  const { setIsLoggedIn, accessToken } = useAuthStore();
 
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [address, setAddress] = useState("");
 
+  useEffect(() => {
+    accessToken ? setIsLoggedIn(true) : setIsLoggedIn(state)    
+  }, [state]);
 
   useEffect(() => {
     geoFindMe(setLocation);
