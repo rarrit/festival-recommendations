@@ -3,11 +3,11 @@ import axios from "axios";
 import React from "react";
 import YouTube from "react-youtube";
 
-const GetYoutube = () => {
+const GetYoutube = ({ keyword }) => {
   const queryClient = useQueryClient();
   const opts = {
-    height: "300",
-    width: "520",
+    height: "200",
+    width: "360"
   };
 
   const getYoutubeVideo = async (keyword) => {
@@ -24,14 +24,9 @@ const GetYoutube = () => {
   };
 
   const { data, isPending, isError } = useQuery({
-    queryKey: ["getVideo"],
-    queryFn: () => getYoutubeVideo("가을축제"),
+    queryKey: ["getVideo", keyword],
+    queryFn: () => getYoutubeVideo(keyword)
   });
-
-  // useEffect(() => {
-  //   // 컴포넌트 마운트 시에만 요청
-  //   queryClient.prefetchQuery(["getVideo"], () => getYoutubeVideo("가을축제"));
-  // }, []);
 
   if (isPending) {
     return <div>로딩중...</div>;
@@ -39,17 +34,15 @@ const GetYoutube = () => {
   if (isError) {
     return <div>오류가 발생했습니다</div>;
   }
+  console.log(data);
 
   return (
     <>
-      {data.map((video) => {
-        return (
-          <div key={video.id.videoId}>
-            <h1 className="text-[24px] font-bold">{video.snippet.title}</h1>
-            <YouTube videoId={video.id.videoId} opts={opts} onEnd={(e) => e.target.stopVideo(0)} />
-          </div>
-        );
-      })}
+      {data[0] ? (
+        <YouTube videoId={data[0].id.videoId} opts={opts} onEnd={(e) => e.target.stopVideo(0)} />
+      ) : (
+        <p>관련된 영상이 없습니다.</p>
+      )}
     </>
   );
 };

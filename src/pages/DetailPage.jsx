@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import GetYoutube from "@/components/GetYoutube";
 import { useLocation, useParams } from "react-router-dom";
 
 const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
@@ -117,15 +118,15 @@ const DetailPage = () => {
 
   return (
     <StDetailPage>
-      <StMapContainer>        
+      <StMapContainer>
         <div id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></div>
       </StMapContainer>
 
       <StFestivalInfoContainer>
         <StVideoArea>
-          영상 위치
+          {selectedFestival ? <GetYoutube keyword={selectedFestival && selectedFestival.fstvlNm} /> : null}
         </StVideoArea>
-        <h2>{selectedFestival && selectedFestival.fstvlNm}</h2>        
+        <h2>{selectedFestival && selectedFestival.fstvlNm}</h2>
         {selectedFestival ? (
           <div className="info">
             <p>
@@ -162,7 +163,7 @@ const DetailPage = () => {
 const StDetailPage = styled.div`
   display: flex;
   align-items: flex-start;
-  height: calc(100% - 35px);  
+  height: calc(100% - 35px);
 `;
 
 const StMapContainer = styled.div`
@@ -183,6 +184,6 @@ const StVideoArea = styled.div`
   height: 200px;
   border: 1px solid #e5e5e5;
   margin: 0 0 15px;
-`
+`;
 
 export default DetailPage;
