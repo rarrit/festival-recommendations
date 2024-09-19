@@ -7,18 +7,19 @@ import styled from "styled-components"
 
 const Login = () => {
   const navigate = useNavigate();
-  const {setAccessToken, setNickname, setUserId } = useAuthStore();
+  const {setAccessToken, setNickname, setUserId, setIsLoggedIn } = useAuthStore();
   const { mutate: loginUser } = useUserLogin();
 
   
   const handleLogin = (formData) => {
     loginUser(formData, {
       onSuccess: (response) => {
+        alert("로그인 되었습니다. 메인으로 이동합니다.");
+        navigate("/");        
         setAccessToken(response.accessToken);
         setNickname(response.nickname);
         setUserId(response.userId);    
-        alert("로그인 되었습니다. 메인으로 이동합니다.");
-        navigate("/", { state: true });
+        setIsLoggedIn(true);
       },
       onError: (error) => {
         alert(error.response?.data?.message || "로그인에 실패했습니다.");

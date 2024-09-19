@@ -7,15 +7,11 @@ import { Festival } from "@/components/Festival";
 // import { displayCenterInfo } from "@/core/api/findAddress";
 
 const Main = () => {
-  const { state } = useLocation();
-  const { setIsLoggedIn } = useAuthStore();
+
 
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [address, setAddress] = useState("");
 
-  useEffect(() => {
-    setIsLoggedIn(state);
-  }, [state]);
 
   useEffect(() => {
     geoFindMe(setLocation);
@@ -48,7 +44,7 @@ const Main = () => {
     <StMain id="main">
       <Festival />
       <StMapArea>
-        <p className="myAddress">내 현재 위치는 {address} 입니다</p>        
+        <p className="myAddress">내 현재 위치는 <b>{address}</b> 입니다.</p>        
         <p id="status"></p>
         <a id="map-link" target="_blank"></a>
         <Map id="map" style={{ width: "100%", height: "calc(100vh - 144px)" }}></Map>
@@ -70,11 +66,15 @@ const StMapArea = styled.section`
     right: 5px;
     z-index: 100;   
     font-size: 13px; 
-    font-weight: bold;
+    color: #666;
     background: rgba(255,255,255,.8);
     border-radius: 5px;
     box-shadow: .5px .5px 5px rgba(0,0,0,.4);
     padding: 10px;
+    b {
+      font-weight: bold;
+      color: #3154b5;
+    }
   }
 `
 const Map = styled.div``;
