@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useLocation, useParams } from "react-router-dom";
 
 const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
 
 const DetailPage = () => {
   const [festivals, setFestivals] = useState([]);
   const [selectedFestival, setSelectedFestival] = useState(null);
+  const { fstvlCo } = useParams();
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const latitude = searchParams.get("lat");
+  const longitude = searchParams.get("lng");
+
   // 축제 데이터 fetch
   useEffect(() => {
     const fetchFestivalsData = async () => {
@@ -19,8 +27,10 @@ const DetailPage = () => {
 
         // 응답 데이터가 있는지 확인
         const festivalsArray = response.data.response.body.items;
-        if (festivalsArray && Array.isArray(festivalsArray)) {
-          setFestivals(festivalsArray); // 데이터가 있으면 상태에 저장
+        const festivalData = festivalsArray.find((festival) => festival.fstvlCo === fstvlCo);
+        if (festivalData) {
+          setFestivals(festivalsArray);
+          setSelectedFestival(festivalData); // 데이터가 있으면 상태에 저장
         } else {
           console.error("응답에 축제 데이터가 없습니다.");
         }
@@ -30,10 +40,14 @@ const DetailPage = () => {
     };
 
     fetchFestivalsData(); // 함수 호출
-  }, []);
+  }, [fstvlCo]);
 
   // 카카오 지도 및 마커 설정
   useEffect(() => {
+    const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+    const imageSize = new kakao.maps.Size(24, 35);
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
     if (!window.kakao) {
       console.error("카카오 지도 API가 로드되지 않았습니다.");
       return;
@@ -46,52 +60,60 @@ const DetailPage = () => {
     }
 
     const mapOption = {
-      center: new kakao.maps.LatLng(37.5665, 126.978), // 서울의 기본 중심 좌표
-      level: 10 // 확대 레벨
+      center: new kakao.maps.LatLng(parseFloat(latitude), parseFloat(longitude)), // 전달받은 위도와 경도 사용
+      level: 3 // 확대 레벨
     };
 
     const map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
 
-    const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; // 마커 이미지
-    const imageSize = new kakao.maps.Size(24, 35); // 마커 이미지 크기
-    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지 설정
-
-    // 위도와 경도가 있는 축제만 필터링
-    const validFestivals = festivals.filter((festival) => {
-      const { latitude, longitude } = festival;
-      return latitude && longitude && latitude.trim() !== "" && longitude.trim() !== "";
+    // 해당 축제의 마커 생성
+    const position = new kakao.maps.LatLng(parseFloat(latitude), parseFloat(longitude));
+    const marker = new kakao.maps.Marker({
+      position, // 마커 위치
+      map, // 지도 객체
+      image: markerImage
     });
 
-    // 유효한 축제들에 대해 마커 표시
-    validFestivals.forEach((festival) => {
-      const { latitude, longitude, fstvlNm } = festival;
-
-      const position = new kakao.maps.LatLng(parseFloat(latitude), parseFloat(longitude)); // 축제 좌표 설정
-
-      const marker = new kakao.maps.Marker({
-        position, // 마커 위치
-        map, // 지도 객체
-        title: fstvlNm, // 마커 제목
-        image: markerImage // 마커 이미지
-      });
-
-      //인포윈도우 생성
-      const infoWindow = new kakao.maps.InfoWindow({
-        content: `<div style="padding:5px;z-index:1;">${fstvlNm}</div>`,
-        removable: true
-      });
-
-      // 마커 클릭 시 축제 이름 알림
-      kakao.maps.event.addListener(marker, "click", () => {
-        alert(`${fstvlNm} 축제에 오신 것을 환영합니다!`);
-        infoWindow.open(map, marker); // 인포윈도우 보여주기
-      });
-
-      kakao.maps.event.addListener(marker, "click", () => {
-        setSelectedFestival(festival); // 마커 클릭 시 축제 정보 상태 업데이트
-      });
+    // 해당 축제 마커에 윈도우 인포 자동 표시
+    const infoWindow = new kakao.maps.InfoWindow({
+      content: `
+        <div style="padding:10px; max-width:200px; max-height:100px; white-space:normal; word-wrap:break-word; overflow:auto; font-size:13px">
+           ${selectedFestival ? selectedFestival.fstvlNm : "축제 위치"}
+        </div>`,
+      removable: true
     });
-  }, [festivals]); // 축제 데이터가 변경될 때마다 지도 업데이트
+
+    // 페이지 로드 시 자동으로 해당 축제의 마커에 윈도우 인포 띄우기
+    infoWindow.open(map, marker);
+
+    kakao.maps.event.addListener(marker, "click", () => {
+      infoWindow.open(map, marker);
+    });
+
+    // 다른 마커 설정 (선택 사항: 다른 마커에는 기본적인 윈도우 인포 적용 가능)
+    festivals.forEach((festival) => {
+      if (festival.latitude !== latitude && festival.longitude !== longitude) {
+        const otherPosition = new kakao.maps.LatLng(parseFloat(festival.latitude), parseFloat(festival.longitude));
+        const otherMarker = new kakao.maps.Marker({
+          position: otherPosition,
+          map,
+          image: markerImage
+        });
+
+        const otherInfoWindow = new kakao.maps.InfoWindow({
+          content: `
+          <div style="padding:5px; max-width:2000px; max-height:100px; white-space:normal; word-wrap:break-word; overflow:auto; font-size:13px">
+            ${festival.fstvlNm}
+          </div>`,
+          removable: true
+        });
+
+        kakao.maps.event.addListener(otherMarker, "click", () => {
+          otherInfoWindow.open(map, otherMarker);
+        });
+      }
+    });
+  }, [festivals, latitude, longitude, selectedFestival]); // 축제 데이터와 좌표가 변경될 때마다 지도 업데이트
 
   return (
     <StDetailPage>
