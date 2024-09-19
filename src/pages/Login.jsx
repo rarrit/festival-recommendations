@@ -1,5 +1,6 @@
 import AuthForm from "@/components/auth/AuthForm"
-import { handleUserLogin, handleUserProfile } from "@/core/api/authAPI"
+import { handleUserLogin } from "@/core/api/authAPI"
+import { useUserLogin } from "@/core/hooks/mutations/authMutation"
 import useAuthStore from "@/core/store/authStore"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
@@ -7,21 +8,23 @@ import styled from "styled-components"
 const Login = () => {
   const navigate = useNavigate();
   const {setAccessToken, setNickname, setUserId } = useAuthStore();
+  const { mutate: loginUser } = useUserLogin();
 
-  const handleLogin = async (formData) => {
-    try{
-      const loginData = await handleUserLogin(formData);
-      setAccessToken(loginData.accessToken);
-      setNickname(loginData.nickname);
-      setUserId(loginData.userId);    
-      alert("로그인 되었습니다. 메인으로 이동합니다.");
-      navigate("/", {
-        state: true
-      });
-    }catch(e){
-      console.log("에러가 발생했습니다.", e);
-    }
-  }
+  
+  const handleLogin = (formData) => {
+    loginUser(formData, {
+      onSuccess: (response) => {
+        setAccessToken(response.accessToken);
+        setNickname(response.nickname);
+        setUserId(response.userId);    
+        alert("로그인 되었습니다. 메인으로 이동합니다.");
+        navigate("/", { state: true });
+      },
+      onError: (error) => {
+        alert(error.response?.data?.message || "로그인에 실패했습니다.");
+      }
+    });
+  };
 
   return (
     <StLoginArea>

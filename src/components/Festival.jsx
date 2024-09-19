@@ -46,21 +46,22 @@ export function Festival() {
         {festivalList.map((festival) => {
           return (
             <FestivalItem key={uuid()}>
-              <li>
-                <h2>{festival.fstvlNm}</h2>
-              </li>
-              <li>일시 : {festival.fstvlStartDate}</li>
-              <li>장소 : {festival.lnmadr}</li>
-              <li>문의 : {festival.phoneNumber}</li>
-              <button
-                onClick={() =>
-                  handleOpenMapTab(
-                    `https://map.kakao.com/link/to/${festival.fstvlNm},${Number(festival.latitude)},${Number(festival.longitude)}`
-                  )
-                }
-              >
-                길찾기
-              </button>
+              <h2>{festival.fstvlNm}</h2>
+              <li className="festivalDate"><span>일시</span> {festival.fstvlStartDate}</li>
+              <li className="festivalLocation"><span>장소</span> {festival.lnmadr}</li>
+              <li className="festivalTell"><span>문의</span> {festival.phoneNumber}</li>
+              <div className="btnArea">
+                <button
+                  onClick={() =>
+                    handleOpenMapTab(
+                      `https://map.kakao.com/link/to/${festival.fstvlNm},${Number(festival.latitude)},${Number(festival.longitude)}`
+                    )
+                  }
+                >
+                  길찾기
+                </button>
+                <button>저장하기</button>
+              </div>
             </FestivalItem>
           );
         })}
@@ -69,17 +70,60 @@ export function Festival() {
   );
 }
 
-const FestivalList = styled.div`
-  width: 400px;
-  height: 850px;
+const FestivalList = styled.div`  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 144px);  
+  overflow: hidden;
+  overflow-y: auto;
   padding: 15px;
-  overflow: scroll;
 `;
 
-const FestivalItem = styled.div`
+const FestivalItem = styled.ul`  
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   width: 100%;
-  height: 15vh;
   list-style: none;
-  border: 1px solid black;
-  margin: 7px;
+  box-shadow: .5px .5px 10px rgba(0,0,0,.15);
+  padding: 15px;
+  h2 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 5px;
+    padding: 0 0 5px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  li {
+    position: relative;
+    min-height: 18px;
+    font-size: 13px;
+    padding-left: 40px;
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      font-size: 12px;
+      background: #dfdfdf;
+      border-radius: 3px;      
+    }        
+  }
+  .btnArea {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-top: 1px solid #dfdfdf;
+    margin-top: 5px;
+    padding-top: 5px;  
+    button {
+      flex: 1;
+    }
+  }
 `;

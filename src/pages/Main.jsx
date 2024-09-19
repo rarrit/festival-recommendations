@@ -47,13 +47,12 @@ const Main = () => {
   return (
     <StMain id="main">
       <Festival />
-      <section>
-        <p>내 현재 위치는 {address} 입니다</p>
-        <br />
+      <StMapArea>
+        <p className="myAddress">내 현재 위치는 {address} 입니다</p>        
         <p id="status"></p>
         <a id="map-link" target="_blank"></a>
-        <Map id="map" style={{ width: "850px", height: "800px" }}></Map>
-      </section>
+        <Map id="map" style={{ width: "100%", height: "calc(100vh - 144px)" }}></Map>
+      </StMapArea>
     </StMain>
   );
 };
@@ -62,7 +61,22 @@ const StMain = styled.div`
   display: flex;
   width: 100%;
 `;
-
+const StMapArea = styled.section`
+  position: relative;
+  width: calc(100% - 400px);
+  .myAddress {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;   
+    font-size: 13px; 
+    font-weight: bold;
+    background: rgba(255,255,255,.8);
+    border-radius: 5px;
+    box-shadow: .5px .5px 5px rgba(0,0,0,.4);
+    padding: 10px;
+  }
+`
 const Map = styled.div``;
 
 export default Main;

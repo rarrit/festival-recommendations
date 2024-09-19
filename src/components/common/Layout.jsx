@@ -13,5 +13,9 @@ const Layout = ({ children }) => {
   );
 };
 
-const StContainer = styled.div``;
+const StContainer = styled.div`
+  height: calc(100vh - 47px);
+  padding: 52.4px 0 0 0;
+
+`;
 export default Layout;
