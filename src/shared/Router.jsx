@@ -16,7 +16,7 @@ const Router = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/detailpage" element={<DetailPage />} />
+          <Route path="/detailpage/:fstvlCo" element={<DetailPage />} />
           {/* 디테일 페이지 */}
           <Route
             path="/login"
