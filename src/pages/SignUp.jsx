@@ -17,5 +17,7 @@ const SignUp = () => {
   )
 }
 
-const StSignArea = styled.div``
+const StSignArea = styled.div`
+  height: calc(100% - 35px);
+`
 export default SignUp

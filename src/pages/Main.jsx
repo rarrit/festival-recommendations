@@ -8,7 +8,7 @@ import { Festival } from "@/components/Festival";
 
 const Main = () => {
   const { state } = useLocation();
-  const { setIsLoggedIn } = useAuthStore();
+  const { setIsLoggedIn, accessToken } = useAuthStore();
 
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [address, setAddress] = useState("");
@@ -16,7 +16,7 @@ const Main = () => {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
-    setIsLoggedIn(state);
+    accessToken ? setIsLoggedIn(true) : setIsLoggedIn(state)    
   }, [state]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Main = () => {
     <StMain id="main">
       <Festival map={map} />
       <StMapArea>
-        <p className="myAddress">내 현재 위치는 {address} 입니다</p>
+        <p className="myAddress">내 현재 위치는 <b>{address}</b> 입니다.</p>        
         <p id="status"></p>
         <a id="map-link" target="_blank"></a>
         <Map id="map" style={{ width: "100%", height: "calc(100vh - 144px)" }}></Map>
@@ -72,13 +72,17 @@ const StMapArea = styled.section`
     position: absolute;
     top: 5px;
     right: 5px;
-    z-index: 100;
-    font-size: 13px;
+    z-index: 100;   
+    font-size: 13px; 
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255,255,255,.8);
     border-radius: 5px;
     box-shadow: 0.5px 0.5px 5px rgba(0, 0, 0, 0.4);
     padding: 10px;
+    b {
+      font-weight: bold;
+      color: #3154b5;
+    }
   }
 `;
 const Map = styled.div``;
