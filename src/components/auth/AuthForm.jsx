@@ -22,6 +22,9 @@ const AuthForm = ({ mode, onSubmit}) => {
 
   return (
     <StAuthForm onSubmit={handleSubmit}>
+      <h2>
+        {mode === "login" ? "로그인" : "회원가입"}
+      </h2>
       <input 
         type="text" 
         name="id"
