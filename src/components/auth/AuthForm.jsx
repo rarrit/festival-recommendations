@@ -100,14 +100,14 @@ const StAuthForm = styled.form`
       border: 1px solid #e5e5e5;
       border-radius: 10px;
       &:focus {
-        outline: 1px solid #2be3dd;
+        outline: 1px solid #3154b5;
       }
     }
     button {
       height: 60px;
       font-size: 20px;
       color: white;
-      background: #2be3dd;
+      background: #3154b5;
       border: 0px;
       border-radius: 10px;      
     }

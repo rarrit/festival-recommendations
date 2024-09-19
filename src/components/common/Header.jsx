@@ -70,7 +70,14 @@ const StHeader = styled.header`
         display: block;
         text-decoration: none;
         padding: 15px 0;
+        font-size: 15px;
         color: #858585;
+        border: none;
+        background: transparent;
+        transition: all .25s ease;
+        &:hover {
+          color:#3154b5;
+        }
       }
     }
   }
