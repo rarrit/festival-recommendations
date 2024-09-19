@@ -34,7 +34,7 @@ const Login = () => {
 }
 
 const StLoginArea = styled.div`
-  
+  height: calc(100% - 35px);
 `
 
 export default Login
