@@ -23,7 +23,7 @@ const AuthForm = ({ mode, onSubmit }) => {
   return (
     <StAuthForm onSubmit={handleSubmit}>
       <div className="formInner">
-        <h2>{mode === "login" ? "Login" : "Sign"}</h2>
+        <h2>{mode === "login" ? "Login" : "SignUp"}</h2>
         <input
           type="text"
           name="id"

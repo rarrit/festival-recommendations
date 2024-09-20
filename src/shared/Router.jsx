@@ -27,7 +27,7 @@ const Router = () => {
             }
           />
           <Route
-            path="/sign"
+            path="/sign-up"
             element={
               <PublicRoute isLogin={isLoggedIn}>
                 <SignUp />
