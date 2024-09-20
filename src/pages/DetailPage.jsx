@@ -183,7 +183,7 @@ const StFestivalInfoContainer = styled.div`
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #e5e5e5;
-    &.titleMovie em{
+    &.titleMovie em {
       font-size: 14px;
       color: #858585;
     }
@@ -230,13 +230,12 @@ const StVideoArea = styled.div`
   gap: 5px 10px;
   div {
     width: calc(50% - 5px);
-  }  
+  }
   iframe {
     width: 100%;
     height: 150px;
     border-radius: 10px;
   }
 `;
-
 
 export default DetailPage;

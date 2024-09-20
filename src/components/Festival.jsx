@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import uuid from "react-uuid";
 import { useNavigate } from "react-router-dom";
-import { MapPinned } from 'lucide-react';
+import { MapPinned } from "lucide-react";
 import { BookmarkButton } from "./BookmarkButton";
 
 const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
@@ -12,8 +12,6 @@ export function Festival({ map }) {
   const [festivalList, setFestivalList] = useState([]);
   const [bookmarkList, setBookmarkList] = useState([]);
   const navigate = useNavigate();
-
-
 
   useEffect(() => {
     const fetchFestivalsData = async () => {
@@ -105,18 +103,16 @@ export function Festival({ map }) {
               <li className="festivalDate">
                 <span>일시</span> {festival.fstvlStartDate}
               </li>
-              {
-                festival.lnmadr && 
+              {festival.lnmadr && (
                 <li className="festivalLocation">
                   <span>장소</span> {festival.lnmadr}
                 </li>
-              }              
-              {
-                festival.phoneNumber &&
+              )}
+              {festival.phoneNumber && (
                 <li className="festivalTell">
                   <span>문의</span> {festival.phoneNumber}
                 </li>
-              }              
+              )}
               <div className="btnArea">
                 <button
                   className="kakao-map"
@@ -198,7 +194,7 @@ const FestivalItem = styled.ul`
     gap: 5px;
     border-top: 1px solid #dfdfdf;
     margin-top: 5px;
-    padding-top: 5px;    
+    padding-top: 5px;
     button {
       flex: 1;
       height: 30px;
@@ -206,7 +202,7 @@ const FestivalItem = styled.ul`
       background: white;
       border: 1px solid #858585;
       border-radius: 5px;
-      transition: all .25s ease;
+      transition: all 0.25s ease;
       &:hover {
         color: #fff;
         background: #7793df;
@@ -217,10 +213,10 @@ const FestivalItem = styled.ul`
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 30px;                
+        width: 30px;
         color: white;
         background: #3154b5;
-        border: 1px solid #3154b5;        
+        border: 1px solid #3154b5;
       }
     }
   }

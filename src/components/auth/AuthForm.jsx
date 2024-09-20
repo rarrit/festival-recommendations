@@ -2,76 +2,64 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const AuthForm = ({ mode, onSubmit}) => {
-
+const AuthForm = ({ mode, onSubmit }) => {
   const [formData, setFormData] = useState({
-    id       : "",
-    password : "",
-    nickname : ""
+    id: "",
+    password: "",
+    nickname: ""
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name] : e.target.value
-    })
-  }
+      [e.target.name]: e.target.value
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-  }
+  };
 
   return (
     <StAuthForm onSubmit={handleSubmit}>
       <div className="formInner">
-        <h2>
-          {mode === "login" ? "Login" : "Sign"}
-        </h2>
-        <input 
-          type="text" 
+        <h2>{mode === "login" ? "Login" : "Sign"}</h2>
+        <input
+          type="text"
           name="id"
           value={formData.id}
           onChange={handleChange}
           placeholder="아이디를 입력해주세요."
           required
         />
-        {
-          mode === "sign" 
-          ? (
-            <input 
-              type="text" 
-              name="nickname"
-              value={formData.nickname}
-              onChange={handleChange}
-              placeholder="닉네임을 입력해주세요."
-              required
-            />
-          ) : (
-            ""
-          )
-        }   
-        <input 
-          type="password" 
+        {mode === "sign" ? (
+          <input
+            type="text"
+            name="nickname"
+            value={formData.nickname}
+            onChange={handleChange}
+            placeholder="닉네임을 입력해주세요."
+            required
+          />
+        ) : (
+          ""
+        )}
+        <input
+          type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
           placeholder="비밀번호를 입력해주세요."
           required
         />
-        <button 
-          type="submit">
-          { mode === "login" ? "로그인" : "회원가입" }
-        </button>
+        <button type="submit">{mode === "login" ? "로그인" : "회원가입"}</button>
         <div className="linkArea">
-          { mode === "login" 
-            ? <Link to={`/sign`}>회원가입</Link>
-            : <Link to={`/login`}>로그인</Link>
-          }
+          {mode === "login" ? <Link to={`/sign`}>회원가입</Link> : <Link to={`/login`}>로그인</Link>}
         </div>
-      </div>      
+      </div>
     </StAuthForm>
-  )
-}
+  );
+};
 
 const StAuthForm = styled.form`
   display: flex;
@@ -85,7 +73,7 @@ const StAuthForm = styled.form`
     gap: 10px;
     width: 100%;
     max-width: 600px;
-    box-shadow: .5px .5px 10px rgba(0,0,0,.15);
+    box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     padding: 50px 30px;
     h2 {
@@ -109,7 +97,7 @@ const StAuthForm = styled.form`
       color: white;
       background: #3154b5;
       border: 0px;
-      border-radius: 10px;      
+      border-radius: 10px;
     }
     a {
       font-size: 16px;
@@ -119,6 +107,6 @@ const StAuthForm = styled.form`
       margin: 15px 0 0 0;
     }
   }
-`
+`;
 
-export default AuthForm
+export default AuthForm;
