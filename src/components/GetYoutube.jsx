@@ -13,7 +13,7 @@ const GetYoutube = ({ keyword }) => {
   const getYoutubeVideo = async (keyword) => {
     try {
       const { data } = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${keyword}&type=video&maxResults=1&key=${
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${keyword}&type=video&maxResults=4&key=${
           import.meta.env.VITE_YOUTUBE_KEY
         }`
       );
@@ -32,17 +32,15 @@ const GetYoutube = ({ keyword }) => {
     return <div>로딩중...</div>;
   }
   if (isError) {
-    return <div>오류가 발생했습니다</div>;
+    return <div>유튜브 api 당일 할당량을 초과했습니다.</div>;
   }
   console.log(data);
 
   return (
     <>
-      {data[0] ? (
-        <YouTube videoId={data[0].id.videoId} opts={opts} onEnd={(e) => e.target.stopVideo(0)} />
-      ) : (
-        <p>관련된 영상이 없습니다.</p>
-      )}
+      {data.map((video) => (
+        <YouTube key={video.id.videoId} videoId={video.id.videoId} opts={opts} onEnd={(e) => e.target.stopVideo(0)} />
+      ))}
     </>
   );
 };
