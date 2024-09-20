@@ -190,7 +190,6 @@ const StFestivalInfoContainer = styled.div`
     }
   }
   .info {
-    max-height: 170px;
     overflow: hidden;
     overflow-y: auto;
     padding: 3px 0;
