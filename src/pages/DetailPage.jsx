@@ -223,17 +223,18 @@ const StFestivalInfoContainer = styled.div`
 `;
 
 const StVideoArea = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0 auto 15px;
-  column-gap: 40px;
-  row-gap: 20px;
-  @media (max-width: 1600px) {
-    display: block;
-    margin: 0 auto;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px 10px;
+  div {
+    width: calc(50% - 5px);
+  }  
   iframe {
     width: 100%;
+    height: 150px;
+    border-radius: 10px;
   }
 `;
 
