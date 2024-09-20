@@ -1,5 +1,10 @@
 {
-  "festival": [
-    
+  "bookmarkFestivalList": [
+    {
+      "id": "9c7a",
+      "fstvlStartDate": "2024-08-14",
+      "lnmadr": "강원특별자치도 춘천시 삼천동 223-2 KT&G상상마당 춘천아트센터",
+      "userId": "test7138"
+    }
   ]
 }
