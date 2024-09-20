@@ -177,13 +177,19 @@ const StFestivalInfoContainer = styled.div`
   height: 100%;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
 `;
 
 const StVideoArea = styled.div`
-  width: 100%;
-  height: 200px;
-  border: 1px solid #e5e5e5;
-  margin: 0 0 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0 auto 15px;
+  column-gap: 40px;
+  row-gap: 20px;
+  @media (max-width: 1600px) {
+    display: block;
+    margin: 0 auto;
+  }
 `;
 
 export default DetailPage;
