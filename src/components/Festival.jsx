@@ -9,6 +9,7 @@ const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUic
 
 export function Festival({ map }) {
   const [festivalList, setFestivalList] = useState([]);
+  const [bookmarkList, setBookmarkList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export function Festival({ map }) {
         const response = await axios.get(
           `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${API_KEY}&pageNo=1&numOfRows=100&type=JSON`
         );
-        console.log("API Response:", response.data); // API 응답 구조 확인
+        // console.log("API Response:", response.data); // API 응답 구조 확인
 
         // 응답 데이터가 있는지 확인
         const festivalsArray = response.data.response.body.items;
@@ -75,6 +76,22 @@ export function Festival({ map }) {
     navigate(`/detailpage/${festival.fstvlCo}?lat=${festival.latitude}&lng=${festival.longitude}`); // 위도, 경도 함께 전달
   };
 
+  useEffect(() => {
+    const getBookmarkFestivalList = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/bookmarkFestivalList");
+        if (response.statusText === "OK") {
+          console.log(response.data);
+          setBookmarkList(response.data);
+        }
+        // console.log(response);
+      } catch (error) {
+        console.log("북마크 불러오기 실패");
+      }
+    };
+    getBookmarkFestivalList();
+  }, []);
+
   return (
     <>
       <FestivalList>
@@ -108,7 +125,7 @@ export function Festival({ map }) {
                 >
                   상세보기
                 </button>
-                <BookmarkButton festival={festival} />
+                <BookmarkButton festival={festival} bookmarkList={bookmarkList} />
               </div>
             </FestivalItem>
           );
