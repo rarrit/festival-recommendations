@@ -25,7 +25,8 @@ const GetYoutube = ({ keyword }) => {
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["getVideo", keyword],
-    queryFn: () => getYoutubeVideo(keyword)
+    queryFn: () => getYoutubeVideo(keyword),
+    refetchOnWindowFocus: false
   });
 
   if (isPending) {
