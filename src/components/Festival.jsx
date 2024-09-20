@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import uuid from "react-uuid";
 import { useNavigate } from "react-router-dom";
+import { MapPinned } from 'lucide-react';
 
 const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
 
 export function Festival({ map }) {
   const [festivalList, setFestivalList] = useState([]);
   const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const fetchFestivalsData = async () => {
@@ -79,21 +82,28 @@ export function Festival({ map }) {
               <li className="festivalDate">
                 <span>일시</span> {festival.fstvlStartDate}
               </li>
-              <li className="festivalLocation">
-                <span>장소</span> {festival.lnmadr}
-              </li>
-              <li className="festivalTell">
-                <span>문의</span> {festival.phoneNumber}
-              </li>
+              {
+                festival.lnmadr && 
+                <li className="festivalLocation">
+                  <span>장소</span> {festival.lnmadr}
+                </li>
+              }              
+              {
+                festival.phoneNumber &&
+                <li className="festivalTell">
+                  <span>문의</span> {festival.phoneNumber}
+                </li>
+              }              
               <div className="btnArea">
                 <button
+                  className="kakao-map"
                   onClick={() =>
                     handleOpenMapTab(
                       `https://map.kakao.com/link/to/${festival.fstvlNm},${Number(festival.latitude)},${Number(festival.longitude)}`
                     )
                   }
                 >
-                  길찾기
+                  <MapPinned />
                 </button>
                 <button
                   onClick={
@@ -118,7 +128,7 @@ const FestivalList = styled.div`
   gap: 10px;
   width: 100%;
   max-width: 400px;
-  height: calc(100vh - 144px);
+  height: calc(100vh - 135px);
   overflow: hidden;
   overflow-y: auto;
   padding: 15px;
@@ -130,14 +140,16 @@ const FestivalItem = styled.ul`
   gap: 5px;
   width: 100%;
   list-style: none;
-  box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
   padding: 15px;
   h2 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     margin: 0 0 5px;
     padding: 0 0 5px;
     border-bottom: 1px solid #e5e5e5;
+    word-break: keep-all;
   }
   li {
     position: relative;
@@ -163,9 +175,30 @@ const FestivalItem = styled.ul`
     gap: 5px;
     border-top: 1px solid #dfdfdf;
     margin-top: 5px;
-    padding-top: 5px;
+    padding-top: 5px;    
     button {
       flex: 1;
+      height: 30px;
+      font-size: 13px;
+      background: white;
+      border: 1px solid #858585;
+      border-radius: 5px;
+      transition: all .25s ease;
+      &:hover {
+        color: #fff;
+        background: #7793df;
+        border: 1px solid #7793df;
+      }
+      &.kakao-map {
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;                
+        color: white;
+        background: #3154b5;
+        border: 1px solid #3154b5;        
+      }
     }
   }
 `;

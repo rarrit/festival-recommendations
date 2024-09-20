@@ -119,36 +119,37 @@ const DetailPage = () => {
   return (
     <StDetailPage>
       <StMapContainer>
-        <div id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></div>
+        <div id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></div>        
       </StMapContainer>
 
       <StFestivalInfoContainer>
+        <h2 className="titleMovie">관련 영상 <em>(유튜브 기준 최상위 영상입니다.)</em></h2>
         <StVideoArea>
-          {selectedFestival ? <GetYoutube keyword={selectedFestival && selectedFestival.fstvlNm} /> : null}
+          {selectedFestival ? <GetYoutube keyword={selectedFestival && selectedFestival.fstvlNm} /> : null}          
         </StVideoArea>
         <h2>{selectedFestival && selectedFestival.fstvlNm}</h2>
         {selectedFestival ? (
           <div className="info">
             <p>
-              <strong>개최 장소:</strong> {selectedFestival.opar}
+              <strong>개최 장소</strong> {selectedFestival.opar}
             </p>
             <p>
-              <strong>축제 시작일:</strong> {selectedFestival.fstvlStartDate}
+              <strong>축제 시작일</strong> {selectedFestival.fstvlStartDate}
             </p>
             <p>
-              <strong>축제 종료일:</strong> {selectedFestival.fstvlEndDate}
+              <strong>축제 종료일</strong> {selectedFestival.fstvlEndDate}
             </p>
             <p>
-              <strong>전화번호:</strong> {selectedFestival.phoneNumber}
+              <strong>전화번호</strong> {selectedFestival.phoneNumber}
             </p>
             <p>
-              <strong>지번 주소:</strong> {selectedFestival.rdnmadr}
+              <strong>지번 주소</strong> {selectedFestival.rdnmadr}
             </p>
             <p>
-              <strong>도로명 주소:</strong> {selectedFestival.lnmadr}
+              <strong>도로명 주소</strong> {selectedFestival.lnmadr}
             </p>
             <p>
-              <strong>축제 내용:</strong> {selectedFestival.fstvlCo}
+              <strong>축제 내용</strong> {selectedFestival.fstvlCo}
             </p>
           </div>
         ) : (
@@ -177,6 +178,50 @@ const StFestivalInfoContainer = styled.div`
   height: 100%;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  h2 {
+    font-size: 18px;
+    word-break: keep-all;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    &.titleMovie em{
+      font-size: 14px;
+      color: #858585;
+    }
+  }
+  .info {
+    max-height: 170px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 3px 0;
+  }
+  p {
+    position: relative;
+    font-size: 13px;
+    gap: 10px;
+    word-break: keep-all;
+    padding-left: 100px;
+    color: #454545;
+    strong {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      width: 90px;
+      font-size: 12px;
+      text-align: center;
+      color: #000;
+      background: #e5e5e5;
+      border-radius: 5px;
+      padding: 2px;
+    }
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 const StVideoArea = styled.div`
@@ -184,6 +229,9 @@ const StVideoArea = styled.div`
   height: 200px;
   border: 1px solid #e5e5e5;
   margin: 0 0 15px;
+  iframe {
+    width: 100%;
+  }
 `;
 
 export default DetailPage;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import useAuthStore from "@/core/store/authStore";
 import { Link, useNavigate } from "react-router-dom";
-// import logo from "@/assets/img/logo.png"
+import { Wand } from 'lucide-react';
 
 const Header = () => {
   const { logout, isLoggedIn } = useAuthStore();
@@ -18,7 +18,15 @@ const Header = () => {
       <GlobalStyle />
       <StHeader>
         <div className="inner">
-          <h1><Link to="/">가을축제핑</Link></h1>
+          <h1>
+            <Link to="/">
+              <Wand />
+              <p>
+                <span>수료후에가는</span>
+                가을축제핑
+              </p>
+            </Link>
+          </h1>
           <ul>
             {isLoggedIn ? (
               <>
@@ -62,6 +70,27 @@ const StHeader = styled.header`
     padding: 0 30px;
     h1 {
       font-weight: bold;
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-right: 5px;          
+          color: #3154b5;
+        }
+        p {
+          display: flex;
+          flex-direction: column;
+          font-size: 16px;
+          color: #000;
+          span {
+            font-size: 10px;
+            color: #868686;
+          }
+        }
+      }
     }
     ul {
       display: flex;
