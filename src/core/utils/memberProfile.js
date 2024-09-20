@@ -22,5 +22,5 @@ export const memberProfile = [
     name: "강수진",
     blog: "https://prontjin.tistory.com/",
     github: "https://github.com/Kang-1230"
-  },
-]
+  }
+];
