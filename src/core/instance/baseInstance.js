@@ -8,3 +8,7 @@ export const KAKAO_MAP_API = axios.create({
     Authorization: `KakaoAK cf6dffdfd10d314df50c24839218bb60`, // Authorization 헤더에 앱 키 추가
   }
 });
+
+export const FESTIVAL_API = axios.create({
+  baseURL: "http://127.0.0.1:4000/"
+})

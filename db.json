@@ -83,6 +83,48 @@
       "referenceDate": "2024-05-27",
       "insttCode": "4181000",
       "userId": "test7138"
+    },
+    {
+      "id": "9d9ca98f-9d8e-8e29-3759-5e5a04ca1afc",
+      "fstvlNm": "2024춘천예술문화축제 - 제11회 한여름밤의 아리아",
+      "opar": "상상마당 야외공연장",
+      "fstvlStartDate": "2024-08-14",
+      "fstvlEndDate": "2024-08-14",
+      "fstvlCo": "춘천예술문화축제  한여름 밤의 아리아",
+      "mnnstNm": "춘천민예총",
+      "auspcInsttNm": "강원특별자치도 춘천시청+(사)강원민예총 춘천지부",
+      "suprtInsttNm": "",
+      "phoneNumber": "033-251-8907",
+      "homepageUrl": "",
+      "relateInfo": "공연관람",
+      "rdnmadr": "강원특별자치도 춘천시 스포츠타운길399번길 25 어린이회관",
+      "lnmadr": "강원특별자치도 춘천시 삼천동 223-2 KT&G상상마당 춘천아트센터",
+      "latitude": "37.874122",
+      "longitude": "127.702307",
+      "referenceDate": "2024-05-27",
+      "insttCode": "4181000",
+      "userId": "rarrit94"
+    },
+    {
+      "id": "f7241fae-81ca-1370-1065-10cba2cadfe1",
+      "fstvlNm": "2024 춘천연극제",
+      "opar": "봄내극장",
+      "fstvlStartDate": "2024-07-01",
+      "fstvlEndDate": "2024-09-30",
+      "fstvlCo": "관객과 함께 웃고 호흡하는 연극제",
+      "mnnstNm": "(사)춘천연극제",
+      "auspcInsttNm": "(사)춘천연극제+G1방송",
+      "suprtInsttNm": "강원특별자치도청+강원특별자치도 춘천시청+신한은행+강원도개발공사+한국수력원자력 한강수력본부+강원대학교+KBSJOB(주)한국고용정보+(주)미디어",
+      "phoneNumber": "033-241-4345",
+      "homepageUrl": "http://citf.or.kr/document/citf_intro",
+      "relateInfo": "공연관람",
+      "rdnmadr": "강원특별자치도 춘천시 서부대성로 71",
+      "lnmadr": "강원특별자치도 춘천시 옥천동 73-2",
+      "latitude": "37.882374",
+      "longitude": "127.731332",
+      "referenceDate": "2024-05-27",
+      "insttCode": "4181000",
+      "userId": "rarrit94"
     }
   ]
 }
