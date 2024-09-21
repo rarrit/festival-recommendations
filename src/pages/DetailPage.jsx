@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import GetYoutube from "@/components/GetYoutube";
 import { useLocation, useParams } from "react-router-dom";
+import { mediaQuery } from "@/core/utils/\bresponsive";
 
 const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
 
@@ -118,37 +119,38 @@ const DetailPage = () => {
 
   return (
     <StDetailPage>
-      <StMapContainer>
-        <div id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></div>
+      <StMapContainer>        
+        <StMap id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></StMap>
       </StMapContainer>
 
       <StFestivalInfoContainer>
         <StVideoArea>
+          <h2 className="titleMovie">관련 영상<em> (YOUTUBE 상위 영상입니다.)</em></h2>
           {selectedFestival ? <GetYoutube keyword={selectedFestival && selectedFestival.fstvlNm} /> : null}
         </StVideoArea>
         <h2>{selectedFestival && selectedFestival.fstvlNm}</h2>
         {selectedFestival ? (
           <div className="info">
             <p>
-              <strong>개최 장소:</strong> {selectedFestival.opar}
+              <strong>개최 장소</strong> {selectedFestival.opar}
             </p>
             <p>
-              <strong>축제 시작일:</strong> {selectedFestival.fstvlStartDate}
+              <strong>축제 시작일</strong> {selectedFestival.fstvlStartDate}
             </p>
             <p>
-              <strong>축제 종료일:</strong> {selectedFestival.fstvlEndDate}
+              <strong>축제 종료일</strong> {selectedFestival.fstvlEndDate}
             </p>
             <p>
-              <strong>전화번호:</strong> {selectedFestival.phoneNumber}
+              <strong>전화번호</strong> {selectedFestival.phoneNumber}
             </p>
             <p>
-              <strong>지번 주소:</strong> {selectedFestival.rdnmadr}
+              <strong>지번 주소</strong> {selectedFestival.rdnmadr}
             </p>
             <p>
-              <strong>도로명 주소:</strong> {selectedFestival.lnmadr}
+              <strong>도로명 주소</strong> {selectedFestival.lnmadr}
             </p>
             <p>
-              <strong>축제 내용:</strong> {selectedFestival.fstvlCo}
+              <strong>축제 내용</strong> {selectedFestival.fstvlCo}
             </p>
           </div>
         ) : (
@@ -164,12 +166,30 @@ const StDetailPage = styled.div`
   display: flex;
   align-items: flex-start;
   height: calc(100% - 35px);
+  ${
+    mediaQuery.mobile`
+      flex-direction: column;
+      width: 100%;
+      height: auto;    
+    `
+  }  
 `;
-
 const StMapContainer = styled.div`
   width: 50%;
+  ${
+    mediaQuery.mobile`
+      width: 100%;
+      height: 250px;
+    `
+  }  
 `;
-
+const StMap = styled.div`
+  ${
+    mediaQuery.mobile`
+      height: 100% !important;
+    `
+  }  
+`
 const StFestivalInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -178,13 +198,14 @@ const StFestivalInfoContainer = styled.div`
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   h2 {
+    width: 100%;
     font-size: 18px;
     word-break: keep-all;
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #e5e5e5;
     &.titleMovie em {
-      font-size: 14px;
+      font-size: 13px;
       color: #858585;
     }
   }
@@ -220,6 +241,11 @@ const StFestivalInfoContainer = styled.div`
       margin-bottom: 10px;
     }
   }
+  ${
+    mediaQuery.mobile`
+      width: 100%;  
+    `
+  }  
 `;
 
 const StVideoArea = styled.div`
@@ -228,14 +254,25 @@ const StVideoArea = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px 10px;
+  margin: 0 0 10px;
+  h2 {
+
+  }
   div {
+    flex: 1 0 45%;
     width: calc(50% - 5px);
   }
-  iframe {
+  iframe {    
     width: 100%;
     height: 150px;
     border-radius: 10px;
   }
+  ${
+    mediaQuery.mobile`
+      order: 2;
+      margin: 15px 0 0 0;
+    `
+  } 
 `;
 
 export default DetailPage;

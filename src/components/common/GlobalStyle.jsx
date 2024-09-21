@@ -53,6 +53,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'GmarketSansMedium' !important;
     box-sizing: border-box;
+    word-break: keep-all;
   }  
   button, a {
     cursor:pointer;

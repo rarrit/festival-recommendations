@@ -2,6 +2,7 @@ import { memberProfile } from "@/core/utils/memberProfile";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Wand } from "lucide-react";
+import { mediaQuery } from "@/core/utils/\bresponsive";
 
 const Footer = () => {
   return (
@@ -46,6 +47,7 @@ const StFooter = styled.footer`
     padding: 5px 0;
     border-top: 1px solid #e1e1e1;
     b {
+      color: #000;
       font-weight: 400;
     }
   }
@@ -55,6 +57,13 @@ const StFooter = styled.footer`
     justify-content: space-between;
     width: 100%;
     padding: 10px 30px;
+    ${
+      mediaQuery.mobile`
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+      `
+    }  
     strong {
       display: flex;
       align-items: center;
