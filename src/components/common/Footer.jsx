@@ -1,12 +1,13 @@
 import { memberProfile } from "@/core/utils/memberProfile"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { Wand } from 'lucide-react';
 
 const Footer = () => {
   return (
     <StFooter>
       <div className="inner">
-        <strong>가을축제핑</strong>
+        <strong><Wand />12조 - 가을축제핑</strong>
         <ul>
           {
             memberProfile.map(member => {
@@ -14,7 +15,7 @@ const Footer = () => {
                 <li key={member.id}>
                   {member.name}
                   <div className="linkBox">
-                    <Link>깃</Link>/
+                    <Link>깃헙</Link>
                     <Link>블로그</Link>
                   </div>
                 </li>
@@ -53,15 +54,46 @@ const StFooter = styled.footer`
     justify-content: space-between;
     width: 100%;
     padding: 10px 30px;
-    strong {
+    strong {      
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
       font-weight: bold;
+      svg {
+        color: #3154b5;
+      }
     }
     ul {
       display: flex;
       align-items: center;
       gap: 15px;
       li {
-        font-size: 12px
+        font-size: 12px;        
+        a {
+          position: relative;
+          font-size: 10px;
+          color: #858585;
+          text-decoration: none;    
+          &:hover {
+            color: #3154b5;
+          }      
+          &:first-child {
+            margin-right: 3px;
+            padding-right: 3px;
+            &:before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              right: -1px;
+              width: 2px;
+              height: 2px;              
+              background: #858585;
+              border-radius: 100%;
+              transform: translateY(-50%);
+            }
+          }
+        }
       }
     }
   }

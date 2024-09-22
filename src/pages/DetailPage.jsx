@@ -177,13 +177,66 @@ const StFestivalInfoContainer = styled.div`
   height: 100%;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  h2 {
+    font-size: 18px;
+    word-break: keep-all;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    &.titleMovie em{
+      font-size: 14px;
+      color: #858585;
+    }
+  }
+  .info {
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 3px 0;
+  }
+  p {
+    position: relative;
+    font-size: 13px;
+    gap: 10px;
+    word-break: keep-all;
+    padding-left: 100px;
+    color: #454545;
+    strong {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      width: 90px;
+      font-size: 12px;
+      text-align: center;
+      color: #000;
+      background: #e5e5e5;
+      border-radius: 5px;
+      padding: 2px;
+    }
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 const StVideoArea = styled.div`
-  width: 100%;
-  height: 200px;
-  border: 1px solid #e5e5e5;
-  margin: 0 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px 10px;
+  div {
+    width: calc(50% - 5px);
+  }  
+  iframe {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+  }
 `;
+
 
 export default DetailPage;

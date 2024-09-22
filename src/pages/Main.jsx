@@ -55,7 +55,7 @@ const Main = () => {
         <p className="myAddress">내 현재 위치는 <b>{address}</b> 입니다.</p>        
         <p id="status"></p>
         <a id="map-link" target="_blank"></a>
-        <Map id="map" style={{ width: "100%", height: "calc(100vh - 144px)" }}></Map>
+        <Map id="map" style={{ width: "100%", height: "calc(100vh - 135px)" }}></Map>
       </StMapArea>
     </StMain>
   );
