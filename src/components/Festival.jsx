@@ -81,7 +81,7 @@ export function Festival({ map }) {
   useEffect(() => {
     const getBookmarkFestivalList = async () => {
       try {
-        const response = await axios.get("https://periwinkle-trapezoidal-distance.glitch.me/bookmarkFestivalList");
+        const response = await axios.get("http://localhost:4000/bookmarkFestivalList");
         if (response.statusText === "OK") {
           setBookmarkList(response.data);
         }        
