@@ -1,3 +1,46 @@
 {
-  "bookmarkFestivalList": []
+  "bookmarkFestivalList": [
+    {
+      "id": "2024춘천예술문화축제 - 제11회 한여름밤의 아리아rarrit94",
+      "fstvlNm": "2024춘천예술문화축제 - 제11회 한여름밤의 아리아",
+      "opar": "상상마당 야외공연장",
+      "fstvlStartDate": "2024-08-14",
+      "fstvlEndDate": "2024-08-14",
+      "fstvlCo": "춘천예술문화축제  한여름 밤의 아리아",
+      "mnnstNm": "춘천민예총",
+      "auspcInsttNm": "강원특별자치도 춘천시청+(사)강원민예총 춘천지부",
+      "suprtInsttNm": "",
+      "phoneNumber": "033-251-8907",
+      "homepageUrl": "",
+      "relateInfo": "공연관람",
+      "rdnmadr": "강원특별자치도 춘천시 스포츠타운길399번길 25 어린이회관",
+      "lnmadr": "강원특별자치도 춘천시 삼천동 223-2 KT&G상상마당 춘천아트센터",
+      "latitude": "37.874122",
+      "longitude": "127.702307",
+      "referenceDate": "2024-05-27",
+      "insttCode": "4181000",
+      "userId": "rarrit94"
+    },
+    {
+      "id": "제11회 춘천영화제rarrit94",
+      "fstvlNm": "제11회 춘천영화제",
+      "opar": "메가박스 남춘천점+의암공원",
+      "fstvlStartDate": "2024-06-20",
+      "fstvlEndDate": "2024-06-23",
+      "fstvlCo": "개·폐막식+단편영화 시상+영화 상영+관객과의 대화+부대행사 등",
+      "mnnstNm": "(사)춘천영화제",
+      "auspcInsttNm": "(사)춘천영화제",
+      "suprtInsttNm": "",
+      "phoneNumber": "033-251-3370",
+      "homepageUrl": "http://www.ccff.or.kr",
+      "relateInfo": "",
+      "rdnmadr": "강원특별자치도 춘천시 시청길 32, 304호",
+      "lnmadr": "강원특별자치도 춘천시 조양동 6-227",
+      "latitude": "37.8810332",
+      "longitude": "127.7311762",
+      "referenceDate": "2024-05-27",
+      "insttCode": "4181000",
+      "userId": "rarrit94"
+    }
+  ]
 }

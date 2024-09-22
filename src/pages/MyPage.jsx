@@ -1,23 +1,31 @@
+import { BookmarkButton } from "@/components/BookmarkButton";
 import { getFestivals } from "@/core/api/festivalAPI";
 import { FESTIVAL_API } from "@/core/instance/baseInstance";
 import useAuthStore from "@/core/store/authStore";
+import { mediaQuery } from "@/core/utils/\bresponsive";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const [bookmarkList, setBookmarkList] = useState([]);
   const { nickname, userId } = useAuthStore();
-
   const { data, isPending, isError } = useQuery({
     queryKey: [FESTIVAL_API],
     queryFn: getFestivals
   });
 
-  if (isPending) return <div>로딩중.</div>;
-  if (isError) return <div>JSON-SERVER ERROR</div>;
+  useEffect(() => {
+    setBookmarkList(data);
+  }, [data])
 
-  const myFestivalList = data.filter((festival) => festival.userId === userId);
+  if (isPending) return <div>로딩중.</div>;
+  if (isError) return <div>서버 에러</div>;
+
+  const myFestivalList = data?.filter((festival) => festival.userId === userId);
   const handleMoveDetail = (festival) => {
     navigate(`/detailpage/${festival.fstvlCo}?lat=${festival.latitude}&lng=${festival.longitude}`);
   };
@@ -36,7 +44,7 @@ const MyPage = () => {
         {myFestivalList ? (
           myFestivalList.map((festival) => {
             return (
-              <div className="listItem" key={festival.fstvlNm}>
+              <div className="listItem" key={festival.fstvlNm}>                
                 <h3 onClick={() => handleMoveDetail(festival)}>{festival.fstvlNm}</h3>
                 <p>
                   <strong>축제 내용</strong>
@@ -54,6 +62,11 @@ const MyPage = () => {
                   <strong>전화번호</strong>
                   {festival.phoneNumber}
                 </p>
+                <p>
+                  <strong>저장여부</strong>
+                  <BookmarkButton festival={festival} bookmarkList={bookmarkList || []} setBookmarkList={setBookmarkList} />
+                </p>
+                
               </div>
             );
           })
@@ -68,16 +81,44 @@ const MyPage = () => {
 const StMyPageArea = styled.div`
   min-height: calc(100% - 35px);
   padding: 30px;
+  ${
+    mediaQuery.mobile`
+      padding: 30px 15px;
+    `
+  }   
   .nick {
     font-size: 36px;
     border-bottom: 1px solid #000;
     padding: 0 0 15px;
     margin: 0 0 15px;
+    word-break: keep-all;
     span {
       font-size: 44px;
       font-weight: bold;
       color: #3154b5;
+      ${
+        mediaQuery.tablet`
+          font-size: 36px;
+        `
+      }
+      ${
+        mediaQuery.mobile`
+          font-size: 18px;
+        `
+      }    
     }
+    ${
+      mediaQuery.tablet`
+        font-size: 24px;
+        padding: 0 0 10px;
+        margin: 0 0 10px;
+      `
+    }
+    ${
+      mediaQuery.mobile`
+        font-size: 14px;
+      `
+    }    
   }
   .festivalList {
     display: flex;
@@ -86,9 +127,21 @@ const StMyPageArea = styled.div`
     .festivalNum {
       font-size: 16px;
       margin: 0 0 20px;
+      color: #333;
+      ${
+        mediaQuery.mobile`
+          font-size: 12px;
+          margin: 0 0 10px;
+        `
+      }   
       span {
         font-size: 18px;
         color: #3154b5;
+        ${
+          mediaQuery.mobile`
+            font-size: 16px;
+          `
+        }   
       }
     }
     .listItem {
@@ -98,12 +151,23 @@ const StMyPageArea = styled.div`
         margin: 0 0 5px;
         padding: 0 0 5px;
         cursor: pointer;
+        ${
+          mediaQuery.mobile`
+            font-size: 14px;
+          `
+        }   
       }
       p {
         position: relative;
         font-size: 13px;
         padding-left: 90px;
         color: #333;
+        margin:0 0 2px;
+        ${
+          mediaQuery.mobile`
+            font-size: 12px;
+          `
+        }    
         strong {
           position: absolute;
           top: 0;
@@ -116,6 +180,14 @@ const StMyPageArea = styled.div`
           color: #000;
           background: #dfdfdf;
           border-radius: 3px;
+        }
+        button {          
+          height: 16px;
+          font-size: 10px;
+          color: #dfdfdf;
+          background: #333;
+          border: 1px solid #333;
+          border-radius: 5px;
         }
       }
       &:not(:last-child) {

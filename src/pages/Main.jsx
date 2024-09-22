@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { geoFindMe } from "@/core/api/geoFindMe";
 import { Festival } from "@/components/Festival";
+import { mediaQuery } from "@/core/utils/\bresponsive";
 // import { displayCenterInfo } from "@/core/api/findAddress";
 
 const Main = () => {
@@ -66,10 +67,28 @@ const Main = () => {
 const StMain = styled.div`
   display: flex;
   width: 100%;
+  ${
+    mediaQuery.mobile`
+      flex-direction: column;
+    `
+  }
 `;
 const StMapArea = styled.section`
   position: relative;
   width: calc(100% - 400px);
+  ${
+    mediaQuery.tablet`
+      width: calc(100% - 350px);
+    `
+  }
+  ${
+    mediaQuery.mobile`
+      order: 1;
+      flex-direction: column;
+      width: 100%;
+      height: 250px; 
+    `
+  }
   .myAddress {
     position: absolute;
     top: 5px;
@@ -85,8 +104,19 @@ const StMapArea = styled.section`
       font-weight: bold;
       color: #3154b5;
     }
+    ${
+      mediaQuery.mobile`
+        font-size: 11px;
+      `
+    }  
   }
 `;
-const Map = styled.div``;
+const Map = styled.div`
+  ${
+    mediaQuery.mobile`
+      height: 250px !important;
+    `
+  }
+`;
 
 export default Main;

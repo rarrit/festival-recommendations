@@ -2,6 +2,7 @@ import AuthForm from "@/components/auth/AuthForm";
 import { handleUserLogin } from "@/core/api/authAPI";
 import { useUserLogin } from "@/core/hooks/mutations/authMutation";
 import useAuthStore from "@/core/store/authStore";
+import { mediaQuery } from "@/core/utils/\bresponsive";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -34,6 +35,12 @@ const Login = () => {
 
 const StLoginArea = styled.div`
   height: calc(100% - 35px);
+  ${
+    mediaQuery.mobile`
+      height: auto;
+      padding: 60px 15px;
+    `
+  }
 `;
 
 export default Login;

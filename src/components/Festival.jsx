@@ -5,10 +5,13 @@ import uuid from "react-uuid";
 import { useNavigate } from "react-router-dom";
 import { MapPinned } from "lucide-react";
 import { BookmarkButton } from "./BookmarkButton";
+import { mediaQuery } from "@/core/utils/\bresponsive";
+import useAuthStore from "@/core/store/authStore";
 
 const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
 
 export function Festival({ map }) {
+  const { userId } = useAuthStore();  
   const [festivalList, setFestivalList] = useState([]);
   const [bookmarkList, setBookmarkList] = useState([]);
   const navigate = useNavigate();
@@ -41,7 +44,6 @@ export function Festival({ map }) {
     fetchFestivalsData();
   }, []);
 
-  console.log(festivalList);
 
   useEffect(() => {
     if (map && festivalList.length > 0) {
@@ -69,7 +71,6 @@ export function Festival({ map }) {
   }, [map, festivalList, navigate]);
 
   const handleOpenMapTab = (url) => {
-    console.log(url);
     window.open(url, "_blank", "noopener, noreferrer");
   };
 
@@ -82,23 +83,22 @@ export function Festival({ map }) {
       try {
         const response = await axios.get("http://localhost:4000/bookmarkFestivalList");
         if (response.statusText === "OK") {
-          console.log(response.data);
           setBookmarkList(response.data);
-        }
-        // console.log(response);
+        }        
       } catch (error) {
         console.log("북마크 불러오기 실패");
       }
     };
     getBookmarkFestivalList();
   }, []);
+  
 
   return (
     <>
       <FestivalList>
         {festivalList.map((festival) => {
           return (
-            <FestivalItem key={festival.id + festival.fstvlStartDate + festival.phoneNumber}>
+            <FestivalItem key={festival.id + festival.fstvlStartDate + festival.phoneNumber} className={bookmarkList.some((item) => festival.fstvlNm === item.fstvlNm && userId === item.userId) ? "isBookmarked" : ""}>
               <h2>{festival.fstvlNm}</h2>
               <li className="festivalDate">
                 <span>일시</span> {festival.fstvlStartDate}
@@ -151,6 +151,26 @@ const FestivalList = styled.div`
   overflow: hidden;
   overflow-y: auto;
   padding: 15px;
+  .isBookmarked {
+    border: 2px solid #000;
+    button:last-child {
+      color: #fff;
+      background: #959595;
+    }
+  }
+  ${
+    mediaQuery.tablet`
+      max-width: 350px
+    `
+  }
+  ${
+    mediaQuery.mobile`
+      order: 2;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    `
+  }
 `;
 
 const FestivalItem = styled.ul`
@@ -169,12 +189,22 @@ const FestivalItem = styled.ul`
     padding: 0 0 5px;
     border-bottom: 1px solid #e5e5e5;
     word-break: keep-all;
+    ${
+      mediaQuery.tablet`
+        font-size: 14px;
+      `
+    }
   }
   li {
     position: relative;
     min-height: 18px;
     font-size: 13px;
     padding-left: 40px;
+    ${
+      mediaQuery.tablet`
+        font-size: 12px;
+      `
+    }
     span {
       position: absolute;
       top: 0;
@@ -186,6 +216,7 @@ const FestivalItem = styled.ul`
       font-size: 12px;
       background: #dfdfdf;
       border-radius: 3px;
+      word-break: keep-all;      
     }
   }
   .btnArea {
@@ -217,6 +248,12 @@ const FestivalItem = styled.ul`
         color: white;
         background: #3154b5;
         border: 1px solid #3154b5;
+      }
+      ${
+      mediaQuery.tablet`
+          font-size: 13px;
+          height: 25px;
+        `
       }
     }
   }

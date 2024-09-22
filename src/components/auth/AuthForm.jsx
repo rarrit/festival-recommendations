@@ -1,3 +1,4 @@
+import { mediaQuery } from "@/core/utils/\bresponsive";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -54,7 +55,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         />
         <button type="submit">{mode === "login" ? "로그인" : "회원가입"}</button>
         <div className="linkArea">
-          {mode === "login" ? <Link to={`/sign`}>회원가입</Link> : <Link to={`/login`}>로그인</Link>}
+          {mode === "login" ? <Link to={`/sign-up`}>회원가입</Link> : <Link to={`/login`}>로그인</Link>}
         </div>
       </div>
     </StAuthForm>
@@ -76,11 +77,21 @@ const StAuthForm = styled.form`
     box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     padding: 50px 30px;
+    ${
+    mediaQuery.mobile`
+        padding: 30px 15px;
+      `
+    }
     h2 {
       font-size: 40px;
       font-weight: bold;
       text-align: center;
       margin: 0 0 20px;
+      ${
+        mediaQuery.mobile`
+          font-size: 28px;
+        `
+      }
     }
     input {
       height: 60px;
@@ -90,6 +101,13 @@ const StAuthForm = styled.form`
       &:focus {
         outline: 1px solid #3154b5;
       }
+      ${
+        mediaQuery.mobile`
+          font-size: 12px;
+          height: 40px;
+          padding: 0 10px;
+        `
+      }
     }
     button {
       height: 60px;
@@ -98,6 +116,12 @@ const StAuthForm = styled.form`
       background: #3154b5;
       border: 0px;
       border-radius: 10px;
+      ${
+        mediaQuery.mobile`
+          font-size: 16px;
+          height: 50px;
+        `
+      }      
     }
     a {
       font-size: 16px;
@@ -105,6 +129,11 @@ const StAuthForm = styled.form`
       display: block;
       text-align: center;
       margin: 15px 0 0 0;
+      ${
+        mediaQuery.mobile`
+          font-size: 13px;
+        `
+      }
     }
   }
 `;

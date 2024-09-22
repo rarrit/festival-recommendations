@@ -34,8 +34,7 @@ const GetYoutube = ({ keyword }) => {
   }
   if (isError) {
     return <div>유튜브 api 당일 할당량을 초과했습니다.</div>;
-  }
-  console.log(data);
+  }  
 
   return (
     <>

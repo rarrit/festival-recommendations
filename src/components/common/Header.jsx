@@ -3,6 +3,7 @@ import GlobalStyle from "./GlobalStyle";
 import useAuthStore from "@/core/store/authStore";
 import { Link, useNavigate } from "react-router-dom";
 import { Wand } from "lucide-react";
+import { mediaQuery } from "@/core/utils/\bresponsive";
 
 const Header = () => {
   const { logout, isLoggedIn } = useAuthStore();
@@ -68,6 +69,11 @@ const StHeader = styled.header`
     justify-content: space-between;
     width: 100%;
     padding: 0 30px;
+    ${
+      mediaQuery.mobile`
+        padding: 0 15px;
+      `
+    }    
     h1 {
       font-weight: bold;
       a {
@@ -96,6 +102,11 @@ const StHeader = styled.header`
       display: flex;
       align-items: center;
       gap: 15px;
+      ${
+        mediaQuery.mobile`
+          gap: 10px;
+        `
+      }  
       a,
       button {
         display: block;
@@ -109,6 +120,11 @@ const StHeader = styled.header`
         &:hover {
           color: #3154b5;
         }
+        ${
+          mediaQuery.mobile`
+            font-size: 13px;
+          `
+        }  
       }
     }
   }

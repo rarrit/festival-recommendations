@@ -1,17 +1,14 @@
 import useAuthStore from "@/core/store/authStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 
 export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
   const { isLoggedIn, userId } = useAuthStore();
   const queryClient = useQueryClient();
 
-  const isBookmarked = bookmarkList.some((item) => {
+  const isBookmarked = bookmarkList.some((item) => {    
     return festival.fstvlNm === item.fstvlNm && userId === item.userId;
-  });
-
-  console.log(isBookmarked);
+  });  
 
   if (isLoggedIn) {
     const { data, isPending, isError } = useQuery({
@@ -38,8 +35,7 @@ export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
         setBookmarkList((prevList) => prevList.filter((item) => item.fstvlNm !== festival.fstvlNm));
         queryClient.invalidateQueries("bookmarkFestivalList");
       }
-    });
-    console.log(festival.id);
+    });    
 
     const handleSaveClick = () => {
       if (isBookmarked) {
