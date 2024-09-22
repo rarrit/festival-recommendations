@@ -11,7 +11,7 @@ const Header = () => {
   const handleLogout = () => {
     logout();
     alert("로그아웃 되었습니다. 메인으로 이동합니다.");
-    return navigate("/");
+    return navigate("/", { state: false });
   };
 
   return (
