@@ -21,7 +21,7 @@ const DetailPage = () => {
       try {
         // API 호출
         const response = await axios.get(
-          `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_KAKAO_MAP_KEY}&pageNo=1&numOfRows=100&type=JSON`
+          `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_FESTIVAL_KEY}&pageNo=1&numOfRows=100&type=JSON`
         );
         console.log("API Response:", response.data); // API 응답 구조 확인
 
@@ -35,7 +35,7 @@ const DetailPage = () => {
           console.error("응답에 축제 데이터가 없습니다.");
         }
       } catch (error) {
-        console.error("API 호출 에러:", error); // API 호출 오류
+        console.error("detail API 호출 에러:", error); // API 호출 오류
       }
     };
 
