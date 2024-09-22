@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 
-export function BookmarkButton({ festival, bookmarkList }) {
+export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
   const { isLoggedIn, userId } = useAuthStore();
   const queryClient = useQueryClient();
 
@@ -27,6 +27,7 @@ export function BookmarkButton({ festival, bookmarkList }) {
           id: `${festival.fstvlNm}${userId}`
         }),
       onSuccess: () => {
+        setBookmarkList((prevList) => [...prevList, { ...festival, userId }]);
         queryClient.invalidateQueries("bookmarkFestivalList");
       }
     });
@@ -34,10 +35,19 @@ export function BookmarkButton({ festival, bookmarkList }) {
     const deleteBookmark = useMutation({
       mutationFn: () => axios.delete(`http://localhost:4000/bookmarkFestivalList/${festival.fstvlNm}${userId}`),
       onSuccess: () => {
+        setBookmarkList((prevList) => prevList.filter((item) => item.fstvlNm !== festival.fstvlNm));
         queryClient.invalidateQueries("bookmarkFestivalList");
       }
     });
     console.log(festival.id);
+
+    const handleSaveClick = () => {
+      if (isBookmarked) {
+        deleteBookmark.mutate();
+      } else {
+        saveBookmark.mutate();
+      }
+    };
 
     if (isPending) {
       return <div>로딩중입니다...</div>;
@@ -50,9 +60,9 @@ export function BookmarkButton({ festival, bookmarkList }) {
     return (
       <>
         {isBookmarked ? (
-          <button onClick={() => deleteBookmark.mutate(festival)}>취소하기</button>
+          <button onClick={handleSaveClick}>취소하기</button>
         ) : (
-          <button onClick={() => saveBookmark.mutate(festival)}>저장하기</button>
+          <button onClick={handleSaveClick}>저장하기</button>
         )}
       </>
     );
@@ -60,6 +70,6 @@ export function BookmarkButton({ festival, bookmarkList }) {
     const notLoginClick = () => {
       alert("로그인이 필요합니다.");
     };
-    return <button onClick={() => notLoginClick()}>저장하기</button>;
+    return <button onClick={notLoginClick}>저장하기</button>;
   }
 }
