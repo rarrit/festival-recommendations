@@ -15,7 +15,6 @@ const SignUp = () => {
   const handleSignUp = (formData) => {
     registerUser(formData, {
       onSuccess: (response) => {
-        alert(`${response.message}, 로그인 페이지로 이동합니다.`);
         navigate("/login");
       },
       onError: (error) => {

@@ -4,6 +4,7 @@ import axios from "axios";
 import GetYoutube from "@/components/GetYoutube";
 import { useLocation, useParams } from "react-router-dom";
 import { mediaQuery } from "@/core/utils/\bresponsive";
+import imgMarker from "@/assets/img/img-marker.png";
 
 const DetailPage = () => {
   const [festivals, setFestivals] = useState([]);
@@ -44,10 +45,10 @@ const DetailPage = () => {
 
   // 카카오 지도 및 마커 설정
   useEffect(() => {
-    const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+    const imageSrc = imgMarker;
     const imageSize = new kakao.maps.Size(24, 35);
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
+    
     if (!window.kakao) {
       console.error("카카오 지도 API가 로드되지 않았습니다.");
       return;
