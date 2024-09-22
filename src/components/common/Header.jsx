@@ -2,7 +2,7 @@ import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import useAuthStore from "@/core/store/authStore";
 import { Link, useNavigate } from "react-router-dom";
-import { Wand } from 'lucide-react';
+import { Wand } from "lucide-react";
 
 const Header = () => {
   const { logout, isLoggedIn } = useAuthStore();
@@ -43,7 +43,7 @@ const Header = () => {
                   <Link to="/login">로그인</Link>
                 </li>
                 <li>
-                  <Link to="/sign">회원가입</Link>
+                  <Link to="/sign-up">회원가입</Link>
                 </li>
               </>
             )}
@@ -61,7 +61,7 @@ const StHeader = styled.header`
   z-index: 9999;
   width: 100%;
   background: #fff;
-  box-shadow: .5px .5px 10px rgba(0,0,0,.25);
+  box-shadow: 0.5px 0.5px 10px rgba(0, 0, 0, 0.25);
   .inner {
     display: flex;
     align-items: center;
@@ -77,7 +77,7 @@ const StHeader = styled.header`
         svg {
           width: 30px;
           height: 30px;
-          margin-right: 5px;          
+          margin-right: 5px;
           color: #3154b5;
         }
         p {
@@ -96,7 +96,8 @@ const StHeader = styled.header`
       display: flex;
       align-items: center;
       gap: 15px;
-      a, button {
+      a,
+      button {
         display: block;
         text-decoration: none;
         padding: 15px 0;
@@ -104,9 +105,9 @@ const StHeader = styled.header`
         color: #858585;
         border: none;
         background: transparent;
-        transition: all .25s ease;
+        transition: all 0.25s ease;
         &:hover {
-          color:#3154b5;
+          color: #3154b5;
         }
       }
     }
