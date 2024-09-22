@@ -26,7 +26,7 @@ export function Festival({ map }) {
         const festivalsArray = response.data.response.body.items;
         if (festivalsArray && Array.isArray(festivalsArray)) {
           const newFestivalWithId = festivalsArray.map((festival) => {
-            return { ...festival, id: uuid() };
+            return { ...festival };
           });
           setFestivalList(newFestivalWithId);
 
@@ -98,7 +98,7 @@ export function Festival({ map }) {
       <FestivalList>
         {festivalList.map((festival) => {
           return (
-            <FestivalItem key={festival.id}>
+            <FestivalItem key={festival.id + festival.fstvlStartDate + festival.phoneNumber}>
               <h2>{festival.fstvlNm}</h2>
               <li className="festivalDate">
                 <span>일시</span> {festival.fstvlStartDate}
