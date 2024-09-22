@@ -1,4 +1,4 @@
-# 12조 가을축제핑
+# 12조 가을축제핑!
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
