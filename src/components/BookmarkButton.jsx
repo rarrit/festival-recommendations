@@ -1,13 +1,12 @@
 import useAuthStore from "@/core/store/authStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 
 export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
   const { isLoggedIn, userId } = useAuthStore();
   const queryClient = useQueryClient();
 
-  const isBookmarked = bookmarkList.some((item) => {
+  const isBookmarked = bookmarkList.some((item) => {    
     return festival.fstvlNm === item.fstvlNm && userId === item.userId;
   });  
 

@@ -1,24 +1,31 @@
+import { BookmarkButton } from "@/components/BookmarkButton";
 import { getFestivals } from "@/core/api/festivalAPI";
 import { FESTIVAL_API } from "@/core/instance/baseInstance";
 import useAuthStore from "@/core/store/authStore";
 import { mediaQuery } from "@/core/utils/\bresponsive";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const [bookmarkList, setBookmarkList] = useState([]);
   const { nickname, userId } = useAuthStore();
-
   const { data, isPending, isError } = useQuery({
     queryKey: [FESTIVAL_API],
     queryFn: getFestivals
   });
 
+  useEffect(() => {
+    setBookmarkList(data);
+  }, [data])
+
   if (isPending) return <div>로딩중.</div>;
   if (isError) return <div>서버 에러</div>;
 
-  const myFestivalList = data.filter((festival) => festival.userId === userId);
+  const myFestivalList = data?.filter((festival) => festival.userId === userId);
   const handleMoveDetail = (festival) => {
     navigate(`/detailpage/${festival.fstvlCo}?lat=${festival.latitude}&lng=${festival.longitude}`);
   };
@@ -55,6 +62,11 @@ const MyPage = () => {
                   <strong>전화번호</strong>
                   {festival.phoneNumber}
                 </p>
+                <p>
+                  <strong>저장여부</strong>
+                  <BookmarkButton festival={festival} bookmarkList={bookmarkList || []} setBookmarkList={setBookmarkList} />
+                </p>
+                
               </div>
             );
           })
@@ -168,6 +180,14 @@ const StMyPageArea = styled.div`
           color: #000;
           background: #dfdfdf;
           border-radius: 3px;
+        }
+        button {          
+          height: 16px;
+          font-size: 10px;
+          color: #dfdfdf;
+          background: #333;
+          border: 1px solid #333;
+          border-radius: 5px;
         }
       }
       &:not(:last-child) {
