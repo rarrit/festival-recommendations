@@ -9,9 +9,7 @@ export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
 
   const isBookmarked = bookmarkList.some((item) => {
     return festival.fstvlNm === item.fstvlNm && userId === item.userId;
-  });
-
-  console.log(isBookmarked);
+  });  
 
   if (isLoggedIn) {
     const { data, isPending, isError } = useQuery({
@@ -38,8 +36,7 @@ export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
         setBookmarkList((prevList) => prevList.filter((item) => item.fstvlNm !== festival.fstvlNm));
         queryClient.invalidateQueries("bookmarkFestivalList");
       }
-    });
-    console.log(festival.id);
+    });    
 
     const handleSaveClick = () => {
       if (isBookmarked) {
