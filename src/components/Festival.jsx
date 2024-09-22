@@ -20,7 +20,7 @@ export function Festival({ map }) {
       try {
         // API 호출
         const response = await axios.get(
-          `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_KAKAO_MAP_KEY}&pageNo=1&numOfRows=100&type=JSON`
+          `https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_KAKAO_MAP_KEY}&pageNo=1&numOfRows=100&type=JSON`
         );
         // console.log("API Response:", response.data); // API 응답 구조 확인
 
