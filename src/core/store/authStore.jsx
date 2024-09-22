@@ -10,13 +10,13 @@ const useAuthStore = create(
       success: false,
       userId: "",
       isLoggedIn: false,
-    
-      setAccessToken: ( token ) => set({ accessToken: token }),
-      setAvatar: ( avatar ) => set({ avatar }),
-      setNickname: ( nickname ) => set({ nickname }),
-      setSuccess: ( success ) => set({ success }),
-      setUserId: ( userId ) => set({ userId }),
-      setIsLoggedIn: ( isLoggedIn ) => set({ isLoggedIn }),
+
+      setAccessToken: (token) => set({ accessToken: token }),
+      setAvatar: (avatar) => set({ avatar }),
+      setNickname: (nickname) => set({ nickname }),
+      setSuccess: (success) => set({ success }),
+      setUserId: (userId) => set({ userId }),
+      setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
 
       logout: () => {
         set({
@@ -24,16 +24,15 @@ const useAuthStore = create(
           nickname: null,
           userId: null,
           isLoggedIn: false
-        })
-        localStorage.removeItem('auth-storage');
-      } 
+        });
+        localStorage.removeItem("auth-storage");
+      }
     }),
     {
       name: "auth-storage",
-      getStorage: () => localStorage,
+      getStorage: () => localStorage
     }
   )
-)
-
+);
 
 export default useAuthStore;
