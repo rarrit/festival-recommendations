@@ -14,7 +14,7 @@ export function Festival({ map }) {
   const [festivalList, setFestivalList] = useState([]);
   const [bookmarkList, setBookmarkList] = useState([]);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const fetchFestivalsData = async () => {
       try {
@@ -22,6 +22,7 @@ export function Festival({ map }) {
         const response = await axios.get(
           `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_FESTIVAL_KEY}&pageNo=1&numOfRows=100&type=JSON`
         );
+        
         // console.log("API Response:", response.data); // API 응답 구조 확인
 
         // 응답 데이터가 있는지 확인
