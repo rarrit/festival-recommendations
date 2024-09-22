@@ -10,5 +10,5 @@ export const KAKAO_MAP_API = axios.create({
 });
 
 export const FESTIVAL_API = axios.create({
-  baseURL: "http://127.0.0.1:4000/"
+  baseURL: "https://periwinkle-trapezoidal-distance.glitch.me/"
 });
