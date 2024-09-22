@@ -15,14 +15,12 @@ export function Festival({ map }) {
   const [bookmarkList, setBookmarkList] = useState([]);
   const navigate = useNavigate();
   
-  const FESTIVAL_API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
   useEffect(() => {
     const fetchFestivalsData = async () => {
       try {
         // API 호출
         const response = await axios.get(
-          // `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_FESTIVAL_KEY}&pageNo=1&numOfRows=100&type=JSON`
-          `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${FESTIVAL_API_KEY}&pageNo=1&numOfRows=100&type=JSON`
+          `http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_FESTIVAL_KEY}&pageNo=1&numOfRows=100&type=JSON`
         );
         
         // console.log("API Response:", response.data); // API 응답 구조 확인
