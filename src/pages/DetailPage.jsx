@@ -45,8 +45,8 @@ const DetailPage = () => {
 
   // 카카오 지도 및 마커 설정
   useEffect(() => {
-    const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-    const imageSize = new kakao.maps.Size(24, 35);
+    const imageSrc = "https://img.icons8.com/?size=100&id=4rfngQwsypMU&format=png&color=000000";
+    const imageSize = new kakao.maps.Size(50, 50);
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     if (!window.kakao) {

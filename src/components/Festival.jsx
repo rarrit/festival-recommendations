@@ -25,12 +25,12 @@ export function Festival({ map }) {
         // 응답 데이터가 있는지 확인
         const festivalsArray = response.data.response.body.items;
         if (festivalsArray && Array.isArray(festivalsArray)) {
-          const newFestivalWithId = festivalsArray.map((festival) => {
-            return { ...festival };
-          });
-          setFestivalList(newFestivalWithId);
+          // const newFestivalWithId = festivalsArray.map((festival) => {
+          //   return { ...festival };
+          // });
+          // setFestivalList(newFestivalWithId);
 
-          // setFestivalList(festivalsArray); // 데이터가 있으면 상태에 저장
+          setFestivalList(festivalsArray); // 데이터가 있으면 상태에 저장
         } else {
           console.error("응답에 축제 데이터가 없습니다.");
         }
@@ -131,7 +131,7 @@ export function Festival({ map }) {
                 >
                   상세보기
                 </button>
-                <BookmarkButton festival={festival} bookmarkList={bookmarkList} />
+                <BookmarkButton festival={festival} bookmarkList={bookmarkList} setBookmarkList={setBookmarkList} />
               </div>
             </FestivalItem>
           );
