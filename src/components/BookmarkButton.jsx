@@ -13,12 +13,12 @@ export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
   if (isLoggedIn) {
     const { data, isPending, isError } = useQuery({
       queryKey: ["bookmarkFestivalList"],
-      queryFn: () => axios.get("https://periwinkle-trapezoidal-distance.glitch.me/bookmarkFestivalList")
+      queryFn: () => axios.get("http://localhost:4000/bookmarkFestivalList")
     });
 
     const saveBookmark = useMutation({
       mutationFn: () =>
-        axios.post("https://periwinkle-trapezoidal-distance.glitch.me/bookmarkFestivalList", {
+        axios.post("http://localhost:4000/bookmarkFestivalList", {
           ...festival,
           userId,
           id: `${festival.fstvlNm}${userId}`
@@ -30,7 +30,7 @@ export function BookmarkButton({ festival, bookmarkList, setBookmarkList }) {
     });
 
     const deleteBookmark = useMutation({
-      mutationFn: () => axios.delete(`https://periwinkle-trapezoidal-distance.glitch.me/bookmarkFestivalList/${festival.fstvlNm}${userId}`),
+      mutationFn: () => axios.delete(`http://localhost:4000/bookmarkFestivalList/${festival.fstvlNm}${userId}`),
       onSuccess: () => {
         setBookmarkList((prevList) => prevList.filter((item) => item.fstvlNm !== festival.fstvlNm));
         queryClient.invalidateQueries("bookmarkFestivalList");
