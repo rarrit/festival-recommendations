@@ -8,8 +8,8 @@ export default defineConfig({
     alias: [
       {
         find: "@",
-        replacement: "/src",
-      },
-    ],
-  },
+        replacement: "/src"
+      }
+    ]
+  }
 });

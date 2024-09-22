@@ -1,6 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  @font-face {
+      font-family: 'GmarketSansMedium';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+  }
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -27,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
     display: block;
   }
   body {
-    line-height: 1;
+    line-height: 1.4;
   }
   ol, ul {
     list-style: none;
@@ -45,8 +51,9 @@ const GlobalStyle = createGlobalStyle`
     border-spacing: 0;
   }
   * {
-    /* font-family: 'EF_jejudoldam'; */
+    font-family: 'GmarketSansMedium' !important;
     box-sizing: border-box;
+    word-break: keep-all;
   }  
   button, a {
     cursor:pointer;
