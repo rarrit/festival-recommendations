@@ -8,8 +8,7 @@ import { BookmarkButton } from "./BookmarkButton";
 import { mediaQuery } from "@/core/utils/\bresponsive";
 import useAuthStore from "@/core/store/authStore";
 
-const API_KEY = "EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D";
-// http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=EAmfJivTLtIuFxBdgR718mbgrR%2BN3XR4h3PqrUjDyKVBhrj3Y%2FxGRE4vUicjWvf00JOirrM8pE4JZGHVCP33IQ%3D%3D&pageNo=1&numOfRows=100&type=JSON
+
 export function Festival({ map }) {
   const { userId } = useAuthStore();  
   const [festivalList, setFestivalList] = useState([]);
@@ -21,7 +20,7 @@ export function Festival({ map }) {
       try {
         // API 호출
         const response = await axios.get(
-          `https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${API_KEY}&pageNo=1&numOfRows=100&type=JSON`
+          `https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api?serviceKey=${import.meta.env.VITE_KAKAO_MAP_KEY}&pageNo=1&numOfRows=100&type=JSON`
         );
         // console.log("API Response:", response.data); // API 응답 구조 확인
 
